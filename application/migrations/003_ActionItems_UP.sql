@@ -1,0 +1,9 @@
+CREATE TABLE `actionitems` (
+	`id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+	`project_id` INT(11) UNSIGNED NOT NULL,
+	`user_id` INT(11) UNSIGNED NOT NULL,
+	`item` VARCHAR(255) NOT NULL,
+	`created` INT(10) UNSIGNED NOT NULL,
+	`completed` INT(10) UNSIGNED DEFAULT NULL,
+	PRIMARY KEY( `id` )
+);
