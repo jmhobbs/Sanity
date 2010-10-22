@@ -86,6 +86,9 @@
 			catch( Kohana_View_Exception $e ){}
 
 			$this->template->title = ucwords( Request::instance()->action );
+			$this->template->left = null;
+			$this->template->right = null;
+			$this->template->menu = array();
 		} // Controller_Site::before
 
 		/**

@@ -8,8 +8,14 @@
 	</head>
 	<body>
 		<h1 id="pageTitle"><?php echo $title; ?></h1>
-		<a id="homeButton" class="button" href="#albums">Albums</a>
-		<a class="button" href="#searchForm">Search</a>
+		<?php
+			if( is_array( $left ) ) {
+				echo HTML::anchor( $left['target'], HTML::chars( $left['name'] ), array( 'class' => 'button', 'id' => 'homeButton' ) );
+			}
+			if( is_array( $right ) ) {
+				echo HTML::anchor( $right['target'], HTML::chars( $right['name'] ), array( 'class' => 'button' ) );
+			}
+		?>
 		<div class="panel">
 			<?php echo $content; ?>
 		</div>
