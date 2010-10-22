@@ -8,6 +8,6 @@
 	echo Form::password( 'password' );
 	echo @Form::error( 'password', $errors );
 	echo '<br/>';
-	echo Form::submit( 'submit', 'Log In' );
+	echo Form::submit( 'submit', 'Log In', array( 'class' => 'submit' ) );
 	echo Form::close();
 

@@ -82,30 +82,6 @@ Kohana::modules(
 	)
 );
 
-// Push admin controllers to the admin directory
-Route::set( 'admin', 'admin(/<controller>(/<action>(/<id>)))' )
-	->defaults(
-		array(
-			'directory'  => 'admin',
-			'controller' => 'home',
-			'action'     => 'index',
-		)
-	);
-
-# Shortcuts for content pages
-Route::set( 'about', 'about')->defaults( array( 'controller' => 'content', 'action' => 'index', 'id' => 'about' ) );
-Route::set( 'home', 'home')->defaults( array( 'controller' => 'content', 'action' => 'index', 'id' => 'home' ) );
-
-# Long form of content pages
-Route::set( 'content', '(content(/<id>))')
-	->defaults(
-		array(
-			'controller' => 'content',
-			'action'     => 'index',
-			'id' => 'home'
-		)
-	);
-
 # Shortcuts for user actions
 Route::set( 'login', 'login' )->defaults( array( 'controller' => 'user', 'action' => 'login' ) );
 Route::set( 'logout', 'logout' )->defaults( array( 'controller' => 'user', 'action' => 'logout' ) );
@@ -113,13 +89,12 @@ Route::set( 'signup', 'signup' )->defaults( array( 'controller' => 'user', 'acti
 
 
 # And the four option default
-Route::set( 'default', '(<controller>(/<action>(/<id>(/<argument>))))' )
+Route::set( 'default', '(<controller>(/<action>(/<id>)))' )
 	->defaults(
 		array(
-			'controller' => 'content',
+			'controller' => 'user',
 			'action'     => 'index',
-			'id' => 'home',
-			'argument' => null
+			'id' => null
 		)
 	);
 

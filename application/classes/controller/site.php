@@ -56,7 +56,7 @@
 			);
 
 		*/
-		public $auth = array();
+		public $auth = array( '*' => '*' );
 
 		public function before () {
 			parent::before();
@@ -82,10 +82,10 @@
 			}
 
 			// Try to pre-fetch the template. Doesn't have to succeed.
-			try { $this->template->body = View::factory( Request::instance()->controller . '/' . Request::instance()->action ); }
+			try { $this->template->content = View::factory( Request::instance()->controller . '/' . Request::instance()->action ); }
 			catch( Kohana_View_Exception $e ){}
 
-
+			$this->template->title = ucwords( Request::instance()->action );
 		} // Controller_Site::before
 
 		/**

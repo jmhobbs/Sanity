@@ -1,9 +1,8 @@
 <html>
 	<head>
-		<title></title>
+		<title><?php echo $title; ?></title>
 	</head>
 	<body>
-		<b>Regular</b>
-		<?php echo $body; ?>
+		<?php echo $content; ?>
 	</body>
 </html>

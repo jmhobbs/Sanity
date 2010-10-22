@@ -3,6 +3,12 @@
 
 	class Controller_User extends Controller_Site {
 
+		public $auth = array(
+			'login' => false,
+			'logout' => false,
+			'*' => '*'
+		);
+
 		public function action_index () {}
 
 		/**
@@ -18,10 +24,10 @@
 					Request::instance()->redirect( 'user/' );
 				}
 				else {
-					$this->template->body->errors = $_POST->errors( 'login' );
+					$this->template->content->errors = $_POST->errors( 'login' );
 				}
 			}
-			
+
 		} // Controller_User::action_login
 
 		/**
@@ -41,7 +47,7 @@
 
 		/**
 		 * Add a new admin user to the system via the command line.
-		 * 
+		 *
 		 * Example Usage:
 		 * php5 index.php --uri="/user/add_admin/jmhobbs/password"
 		 *
@@ -50,11 +56,11 @@
 		 */
 		public function action_add_admin ( $username, $password ) {
 			if( 'cli' != PHP_SAPI ) {
-				$this->template->body = View::factory( 'error/404' );
+				$this->template->content = View::factory( 'error/404' );
 				$this->request->status = 404;
 				return;
 			}
-			
+
 			$user = ORM::factory( 'user' );
 			$user->email = 'stub@example.com';
 			$user->username = $username;
@@ -63,10 +69,10 @@
 
 			$login_role = new Model_Role( array( 'name' => 'login' ) );
 			$user->add( 'roles', $login_role );
-			
+
 			$admin_role = new Model_Role( array( 'name' => 'admin' ) );
 			$user->add( 'roles', $admin_role );
- 
+
 			die( "Created Admin User $username\n\n" );
 		} // Controller_User::action_add_admin
 
