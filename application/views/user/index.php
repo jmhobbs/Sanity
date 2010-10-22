@@ -16,5 +16,10 @@
 <br/>
 
 <ul class="menu">
+	<?php if( Session::instance()->get( 'mobile' ) ) : ?>
+	<li><?php echo HTML::anchor( 'user?mobile=0', 'Non-Mobile View' ); ?></li>
+	<?php else: ?>
+	<li><?php echo HTML::anchor( 'user?mobile=1', 'Mobile View' ); ?></li>
+	<?php endif; ?>
 	<li><?php echo HTML::anchor( 'user/logout/', 'Logout' ); ?></li>
 </ul>

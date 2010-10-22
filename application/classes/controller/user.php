@@ -11,7 +11,7 @@
 		);
 
 		public function action_index () {
-			$this->template->title = 'Dashboard';
+			$this->template->title = 'Sanity';
 		}
 
 		/**
