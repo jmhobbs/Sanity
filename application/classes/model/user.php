@@ -1,6 +1,8 @@
 <?php
 	class Model_User extends Model_Auth_User {
-	
+
+		protected $_has_many = array( 'projects' => array(), 'actionitems' => array() );
+
 		public function validate_create ( &$array ) {
 			// Initialise the validation library and setup some rules
 			$array = Validate::factory( $array )
