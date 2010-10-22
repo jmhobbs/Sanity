@@ -3,15 +3,45 @@
 
 	class Controller_Site extends Controller_Template {
 		public $template = 'site';
-		
+
+		public function __construct ( $request ) {
+
+			$session = Session::instance();
+
+			$mobile = $session->get( 'mobile' );
+
+			if( isset( $_REQUEST['mobile'] ) )
+				$mobile = ( true == $_REQUEST['mobile'] );
+
+			if( is_null( $mobile ) ) {
+				$ua = $_SERVER['HTTP_USER_AGENT'];
+				$matches = array ( '/iPhone/i', '/iPod/i', '/iPad/i' );
+				$mobile = false;
+				foreach ( $matches as $match ) {
+					if ( preg_match( $match, $ua ) ) {
+						$mobile = true;
+						break;
+					}
+				}
+			}
+
+			$session->set( 'mobile', $mobile );
+
+			if( $mobile )
+				$this->template = 'mobile';
+
+			parent::__construct( $request );
+		}
+
+
 		/*
 			We assume all pages are authorized for everyone.
-			
+
 			You can then block things off a bit at a time.
 			'*' is a wildcard.
-			
+
 			Examples:
-			
+
 			$auth = array(
 				// Only roles 'admin' can reach this
 				'controller_one' => 'admin',
@@ -24,15 +54,15 @@
 				// Anyone can access this controller
 				'controller_four' => false
 			);
-			
+
 		*/
 		public $auth = array();
-		
+
 		public function before () {
 			parent::before();
-			
+
 			$this->session = Session::instance();
-			
+
 			# Check user authentication
 			$auth_result = true;
 			$action_name = Request::instance()->action;
@@ -40,7 +70,7 @@
 				$auth_result = $this->_check_auth( $action_name );
 			else if ( array_key_exists( '*', $this->auth ) )
 				$auth_result = $this->_check_auth( '*' );
-			
+
 			if( ! $auth_result ) {
 				if( Auth::instance()->logged_in() ) {
 					//! \todo Flash message.
@@ -57,7 +87,7 @@
 
 
 		} // Controller_Site::before
-		
+
 		/**
 		 * DRY out some of our auth code with an extra method.
 		 */
