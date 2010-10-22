@@ -1,7 +1,11 @@
 <?php
 	class Model_User extends Model_Auth_User {
 
-		protected $_has_many = array( 'projects' => array(), 'actionitems' => array() );
+		public function __construct () {
+			parent::__construct();
+			$this->_has_many['projects'] = array();
+			$this->_has_many['actionitems'] = array();
+		}
 
 		public function validate_create ( &$array ) {
 			// Initialise the validation library and setup some rules

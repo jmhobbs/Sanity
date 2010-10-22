@@ -6,6 +6,7 @@
 		public $auth = array(
 			'login' => false,
 			'logout' => false,
+			'register' => false,
 			'*' => '*'
 		);
 
@@ -28,6 +29,8 @@
 				}
 			}
 
+			$this->template->right = array( 'text' => 'Register', 'target' => '/user/register' );
+
 		} // Controller_User::action_login
 
 		/**
@@ -41,39 +44,23 @@
 		/**
 		 * Create a new user.
 		 **/
-		public function action_signup () {
+		public function action_register () {
 			if( Auth::instance()->logged_in() != 0 ) { Request::instance()->redirect( 'user/' ); }
-		}
 
-		/**
-		 * Add a new admin user to the system via the command line.
-		 *
-		 * Example Usage:
-		 * php5 index.php --uri="/user/add_admin/jmhobbs/password"
-		 *
-		 * @param username The new admin username.
-		 * @param password The new admin password.
-		 */
-		public function action_add_admin ( $username, $password ) {
-			if( 'cli' != PHP_SAPI ) {
-				$this->template->content = View::factory( 'error/404' );
-				$this->request->status = 404;
-				return;
+			if( $_POST ) {
+				$user = ORM::factory( 'user' );
+				$user->email = $_REQUEST['email'];
+				$user->username = $_REQUEST['username'];
+				$user->password = $_REQUEST['password'];
+				$user->save();
+
+	      $login_role = new Model_Role( array( 'name' => 'login' ) );
+				$user->add( 'roles', $login_role );
+
+				Request::instance()->redirect( 'user/' );
 			}
 
-			$user = ORM::factory( 'user' );
-			$user->email = 'stub@example.com';
-			$user->username = $username;
-			$user->password = $password;
-			$user->save();
-
-			$login_role = new Model_Role( array( 'name' => 'login' ) );
-			$user->add( 'roles', $login_role );
-
-			$admin_role = new Model_Role( array( 'name' => 'admin' ) );
-			$user->add( 'roles', $admin_role );
-
-			die( "Created Admin User $username\n\n" );
-		} // Controller_User::action_add_admin
+			$this->template->left = array( 'text' => 'Login', 'target' => '/user/login' );
+		} 
 
 	}
