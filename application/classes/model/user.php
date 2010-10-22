@@ -1,11 +1,12 @@
 <?php
 	class Model_User extends Model_Auth_User {
 
-		public function __construct () {
-			parent::__construct();
-			$this->_has_many['projects'] = array();
-			$this->_has_many['actionitems'] = array();
-		}
+		protected $_has_many = array (
+			'user_tokens' => array('model' => 'user_token'),
+			'roles'       => array('model' => 'role', 'through' => 'roles_users'),
+			'projects'    => array(),
+			'actionitems' => array()
+		);
 
 		public function validate_create ( &$array ) {
 			// Initialise the validation library and setup some rules
