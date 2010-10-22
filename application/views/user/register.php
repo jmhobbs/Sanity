@@ -1,3 +1,4 @@
+<div class="content">
 <?php
 	echo Form::open();
 	echo Form::label( 'email', 'E-Mail' );
@@ -14,4 +15,5 @@
 	echo '<br/>';
 	echo Form::submit( 'submit', 'Register', array( 'class' => 'submit' ) );
 	echo Form::close();
-
+?>
+</div>

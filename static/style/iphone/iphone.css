@@ -53,9 +53,13 @@ body > h1 {
 	border-width: 0 5px;
 }
 
-body > div,
-body > form,
-body > ul {
+ul.menu {
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+div.panel {
 	position: absolute;
 	left: 0;
 	top: 41px;
@@ -65,21 +69,22 @@ body > ul {
 	padding: 0;
 }
 
+
 body > *[selected="true"] {
 	display: block;
 }
 
-body > ul > li {
+ul.menu > li {
 	margin: 0;
 	border-bottom: 1px solid #E0E0E0;
 	padding: 0;
-	background: url(iPhoneArrow.png) no-repeat right center;
+	background: #FFF url(iPhoneArrow.png) no-repeat right center;
 	font-size: 20px;
 	font-weight: bold;
 	list-style: none;
 }
 
-body > ul > li > a {
+ul.menu > li > a {
 	display: block;
 	padding: 8px 32px 8px 8px;
 	text-decoration: none;
@@ -111,4 +116,8 @@ input {
 
 input.submit {
 	padding: 6px;
+}
+
+.content {
+	margin: 20px;
 }

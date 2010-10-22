@@ -10,7 +10,9 @@
 			'*' => '*'
 		);
 
-		public function action_index () {}
+		public function action_index () {
+			$this->template->title = 'Dashboard';
+		}
 
 		/**
 		 * Log a user into the system.
