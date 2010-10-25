@@ -26,4 +26,25 @@
 			$this->template->content->project = $project;
 		}
 
+		public function action_add () {
+			$this->template->title = 'Add Project';
+			$this->template->left = array( 'text' => 'Projects', 'target' => 'project/' );
+
+			if( $_POST ) {
+				$project = ORM::factory( 'project' );
+				$project->name = $_POST['name'];
+				$project->user_id = Auth::instance()->get_user()->id;
+				$project->slug = URL::title( $_POST['name'] );
+				$project->save();
+				if( $project->saved() ) {
+					Message::success( 'Created new project, ' . HTML::chars( $project->name ) );
+					Request::instance()->redirect( 'project/view/' . $project->id );
+				}
+				else {
+					Message::error( 'Could not create project.' );
+				}
+			}
+
+		}
+
 	}

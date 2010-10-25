@@ -121,3 +121,32 @@ input.submit {
 .content {
 	margin: 20px;
 }
+
+#message > li {
+	border: 1px solid #000;
+	-webkit-border-radius: 5px;
+	padding: 3px 5px;
+	background: #FFF;
+	display: inline-block;
+	font-size: 12px;
+	font-weight: bold;
+	color: #444;
+	text-shadow: #BBB 1px 1px 1px;
+}
+
+#message.error > li, #message.warn > li {
+	border-color: #C00000;
+	background: #FFD7D7;
+}
+
+#message.success > li, #message.notice > li {
+	border-color: #09C000;
+	background: #D9FFD7;
+}
+
+/*
+<ul id="message" class"_type_">
+    <li>_Message_</li>
+    ... Repeated if an array
+</ul>
+*/
