@@ -3,6 +3,7 @@
 		<title><?php echo HTML::chars( $title ); ?></title>
 		<!--// http://joehewitt.com/files/iphone/navigation.html //-->
 		<meta name="viewport" content="width=device-width,user-scalable=no" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
 		<link rel="apple-touch-icon" href="<?php echo URL::site( 'image/iphone.png' ); ?>" />
 		<?php echo HTML::style( 'style/iphone/iphone.css' ); ?>
 	</head>
