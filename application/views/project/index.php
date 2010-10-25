@@ -10,6 +10,6 @@
 
 <ul class="menu">
 	<?php foreach( $projects as $project ): ?>
-	<li><?php echo HTML::anchor( 'project/view/' . $project->id, $project->actionitems->find_all()->count() . ' - ' . HTML::chars( $project->name ) ); ?></li>
+	<li><?php echo HTML::anchor( 'project/view/' . $project->id, $project->actionitems->where( 'completed', 'IS', null )->find_all()->count() . ' - ' . HTML::chars( $project->name ) ); ?></li>
 	<?php endforeach; ?>
 </ul>

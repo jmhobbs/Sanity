@@ -26,6 +26,62 @@
 			$this->template->content->item = $item;
 		}
 
+		public function action_complete ( $id ) {
+
+			$item = ORM::factory( 'actionitem', $id );
+			if( ! $item->loaded() ) {
+				Message::error( 'Item Does Not Exist' );
+				Request::instance()->redirect( 'project/' );
+				return;
+			}
+
+			if( $item->user_id != Auth::instance()->get_user()->id ) {
+				Message::error( 'Item Does Not Belong To You' );
+				Request::instance()->redirect( 'project/' );
+				return;
+			}
+
+			$item->completed = time();
+			$item->save();
+			if( $item->saved() ) {
+				Message::success( 'Completed Item' );
+				Request::instance()->redirect( 'project/view/' . $item->project_id );
+			}
+			else {
+				Message::error( 'Could Not Complete Item' );
+				Request::instance()->redirect( 'item/view/' . $item->id );
+			}
+
+		}
+
+		public function action_delete ( $id ) {
+
+			$item = ORM::factory( 'actionitem', $id );
+			if( ! $item->loaded() ) {
+				Message::error( 'Item Does Not Exist' );
+				Request::instance()->redirect( 'project/' );
+				return;
+			}
+
+			if( $item->user_id != Auth::instance()->get_user()->id ) {
+				Message::error( 'Item Does Not Belong To You' );
+				Request::instance()->redirect( 'project/' );
+				return;
+			}
+
+			$item->delete();
+			if( $item->saved() ) {
+				Message::success( 'Deleted Item' );
+				Request::instance()->redirect( 'project/view/' . $item->project_id );
+			}
+			else {
+				Message::error( 'Could Not Delete Item' );
+				Request::instance()->redirect( 'item/view/' . $item->id );
+			}
+
+		}
+
+
 		public function action_add () {
 
 			if( $_POST ) {
