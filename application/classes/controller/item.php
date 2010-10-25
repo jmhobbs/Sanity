@@ -2,6 +2,29 @@
 
 	class Controller_Item extends Controller_Site {
 
+		public function action_index () {
+			Request::instance()->redirect( 'project/' );
+		}
+
+		public function action_view ( $id ) {
+			$item = ORM::factory( 'actionitem', $id );
+			if( ! $item->loaded() ) {
+				Message::error( 'Item Does Not Exist' );
+				Request::instance()->redirect( 'project/' );
+				return;
+			}
+
+			if( $item->user_id != Auth::instance()->get_user()->id ) {
+				Message::error( 'Item Does Not Belong To You' );
+				Request::instance()->redirect( 'project/' );
+				return;
+			}
+
+			$this->template->title = 'Item: ' . $item->item;
+
+			$this->template->content->item = $item;
+		}
+
 		public function action_add () {
 
 			if( $_POST ) {
