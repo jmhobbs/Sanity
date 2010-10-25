@@ -21,6 +21,7 @@
 			}
 
 			$this->template->title = 'Item: ' . $item->item;
+			$this->template->left = array( 'text' => 'Project', 'target' => 'project/view/' . $item->project_id );
 
 			$this->template->content->item = $item;
 		}
