@@ -1,16 +1,15 @@
 # What is this?
 
-This is a modifed base version of Kohana 3, for use in developing apps.
+This is a simple app for tracking action items.  It has a mobile optimized interface and a regular web interface.
+
+It is not complete yet.
 
 # Using this.
 
 1. Unpack this where you want it.
 2. Copy htaccess.txt to .htaccess and edit.
 3. Copy config.php.template to config.php and edit
-4. Develop.
-
-# Versions
-
-Kohana - 3.? - http://kohanaframework.org/
-Message - @3493a83 - http://github.com/daveWid/message
+4. Run migrations
+    php5 index.php --uri=migrations/up/
+5. Enjoy
 
