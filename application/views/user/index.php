@@ -10,7 +10,7 @@
 
 <ul class="menu">
 	<li><?php echo HTML::anchor( 'project/', 'Projects' ); ?></li>
-	<li><?php echo HTML::anchor( 'item/', 'Items' ); ?></li>
+	<li><?php echo HTML::anchor( 'item/', 'Recent Items' ); ?></li>
 </ul>
 
 <br/>

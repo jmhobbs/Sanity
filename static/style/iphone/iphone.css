@@ -150,3 +150,9 @@ input.submit {
 	-webkit-border-radius: 5px;
 	padding: 10px;
 }
+.item-project {
+	font-size: 14px;
+	font-weight: normal;
+	float: right;
+	margin-top: 5px;
+}

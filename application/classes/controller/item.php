@@ -3,7 +3,9 @@
 	class Controller_Item extends Controller_Site {
 
 		public function action_index () {
-			Request::instance()->redirect( 'project/' );
+			$this->template->title = 'Recent Items';
+			$this->template->left = array( 'text' => 'Dashboard', 'target' => 'user/' );
+			$this->template->content->items = ORM::factory( 'actionitem' )->where( 'completed', 'IS', null )->limit( 10 )->find_all();
 		}
 
 		public function action_view ( $id ) {
