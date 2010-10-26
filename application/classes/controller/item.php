@@ -5,7 +5,11 @@
 		public function action_index () {
 			$this->template->title = 'Recent Items';
 			$this->template->left = array( 'text' => 'Dashboard', 'target' => 'user/' );
-			$this->template->content->items = ORM::factory( 'actionitem' )->where( 'completed', 'IS', null )->limit( 10 )->find_all();
+			$this->template->content->items = ORM::factory( 'actionitem' )->
+				where( 'user_id', '=', Auth::instance()->get_user()->id )->
+				where( 'completed', 'IS', null )->
+				limit( 10 )->
+				find_all();
 		}
 
 		public function action_view ( $id ) {
@@ -86,9 +90,10 @@
 
 		public function action_add () {
 
-			if( $_POST ) {
-				if( isset( $_POST['project-id'] ) ) {
-					$project = ORM::factory( 'project', $_POST['project-id'] );
+			if( isset( $_REQUEST['item'] ) and ! empty( $_REQUEST['item'] ) ) {
+
+				if( isset( $_REQUEST['project-id'] ) ) {
+					$project = ORM::factory( 'project', $_REQUEST['project-id'] );
 					if( ! $project->loaded() ) {
 						Message::error( 'Project Does Not Exist' );
 						Request::instance()->redirect( 'project/' );
@@ -104,7 +109,7 @@
 					$item = ORM::factory( 'actionitem' );
 					$item->user_id = Auth::instance()->get_user()->id;
 					$item->project_id = $project->id;
-					$item->item = $_POST['item'];
+					$item->item = $_REQUEST['item'];
 					$item->created = time();
 					$item->save();
 
@@ -119,8 +124,16 @@
 						return;
 					}
 				}
+				else {
+					$this->template->content->item = $_REQUEST['item'];
+					$this->template->content->projects = ORM::factory( 'project' )->
+						where(  'user_id', '=', Auth::instance()->get_user()->id  )->
+						find_all();
+				}
 			}
 
+			$this->template->title = 'Add Item';
+			$this->template->left = array( 'text' => 'Dashboard', 'target' => 'user/' );
 		}
 
 	}
