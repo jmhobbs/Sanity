@@ -5,7 +5,7 @@
 		public function action_index () {
 			$this->template->title = 'Projects';
 			$this->template->left = array( 'text' => 'Dashboard', 'target' => 'user/' );
-			$this->template->content->projects = Auth::instance()->get_user()->projects->find_all();
+			$this->template->content->projects = Auth::instance()->get_user()->projects->order_by( 'name' )->find_all();
 		}
 
 		public function action_view ( $id ) {
