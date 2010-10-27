@@ -122,12 +122,18 @@ input.submit {
 	margin: 20px;
 }
 
+#message {
+	margin: 10px 0;
+	padding: 0;
+}
+
 #message > li {
 	border: 1px solid #000;
-	-webkit-border-radius: 5px;
+	border-left: 0;
+	border-right: 0;
 	padding: 3px 5px;
 	background: #FFF;
-	display: inline-block;
+	display: block;
 	font-size: 12px;
 	font-weight: bold;
 	color: #444;
