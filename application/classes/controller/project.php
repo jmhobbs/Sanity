@@ -31,6 +31,11 @@
 			$this->template->left = array( 'text' => 'Projects', 'target' => 'project/' );
 
 			if( $_POST ) {
+				if( empty( $_POST['name'] ) ) {
+					Message::error( 'Projects must have a name!' );
+					Request::instance()->redirect( 'project/' );
+					return;
+				}
 				$project = ORM::factory( 'project' );
 				$project->name = $_POST['name'];
 				$project->user_id = Auth::instance()->get_user()->id;
