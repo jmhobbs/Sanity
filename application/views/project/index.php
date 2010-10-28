@@ -9,7 +9,25 @@
 </div>
 
 <ul class="menu">
-	<?php foreach( $projects as $project ): ?>
-	<li><?php echo HTML::anchor( 'project/view/' . $project->id, $project->actionitems->where( 'completed', 'IS', null )->find_all()->count() . ' - ' . HTML::chars( $project->name ) ); ?></li>
+	<?php
+		$empty_projects = array();
+		foreach( $projects as $project ) {
+			$count = $project->actionitems->where( 'completed', 'IS', null )->find_all()->count();
+			if( 0 == $count ) {
+				$empty_projects[] = $project;
+				continue;
+			}
+	?>
+	<li><?php echo HTML::anchor( 'project/view/' . $project->id, $count . ' - ' . HTML::chars( $project->name ) ); ?></li>
+	<?php
+		}
+	?>
+</ul>
+
+<br/>
+
+<ul class="menu empty-projects">
+	<?php foreach( $empty_projects as $project ): ?>
+	<li><?php echo HTML::anchor( 'project/view/' . $project->id, '0 - ' . HTML::chars( $project->name ) ); ?></li>
 	<?php endforeach; ?>
 </ul>

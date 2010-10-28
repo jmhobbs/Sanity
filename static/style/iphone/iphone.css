@@ -162,3 +162,7 @@ input.submit {
 	float: right;
 	margin-top: 5px;
 }
+
+.empty-projects, .empty-projects a {
+	color: #AAA;
+}
