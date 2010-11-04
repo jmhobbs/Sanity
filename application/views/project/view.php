@@ -1,20 +1,9 @@
-<div class="content">
-<?php
-	echo Form::open( 'item/add/' );
-	echo Form::label( 'item', 'New Item' );
-	echo Form::input( 'item' );
-	echo Form::hidden( 'project-id', $project->id );
-	echo Form::submit( 'submit', 'Add', array( 'class' => 'submit' ) );
-	echo Form::close();
-?>
-</div>
-
 <?php if( $project->actionitems->where( 'completed', 'IS', null )->find_all()->count() == 0 ): ?>
-<div class="content">
-	<p style="text-align: center;"><b>No Items</b></p>
-</div>
+	<p style="text-align: center;">No Items</p>
+	<?php echo HTML::anchor( 'project/delete/' . $project->id, 'Delete Project', array( 'data-role' => 'button' ) ); ?>
 <?php else: ?>
-<ul class="menu">
+<ul data-role="listview" data-inset="true">
+	<li data-role="list-divider"><?php echo HTML::chars( $project->name ); ?></li>
 <?php foreach( $project->actionitems->where( 'completed', 'IS', null )->find_all() as $item ): ?>
 	<li><?php echo HTML::anchor( 'item/view/' . $item->id, HTML::chars( $item->item ) ); ?></li>
 <?php endforeach; ?>

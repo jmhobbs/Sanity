@@ -5,6 +5,7 @@
 		public function action_index () {
 			$this->template->title = 'Projects';
 			$this->template->left = array( 'text' => 'Dashboard', 'target' => 'user/' );
+			$this->template->right = array( 'text' => 'Add Project', 'target' => 'project/add/', 'attributes' => array( 'data-icon' => 'add' ) );
 			$this->template->content->projects = Auth::instance()->get_user()->projects->order_by( 'name' )->find_all();
 		}
 
@@ -20,8 +21,9 @@
 				Request::instance()->redirect( 'project/' );
 			}
 
-			$this->template->title = 'Project: ' . $project->name;
+			$this->template->title = 'Project';
 			$this->template->left = array( 'text' => 'Projects', 'target' => 'project/' );
+			$this->template->right = array( 'text' => 'Add Item', 'target' => 'item/add/' . $project->id, 'attributes' => array( 'data-icon' => 'add' ) );
 
 			$this->template->content->project = $project;
 		}

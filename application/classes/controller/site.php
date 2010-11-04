@@ -88,6 +88,8 @@
 			$this->template->title = ucwords( Request::instance()->action );
 			$this->template->left = null;
 			$this->template->right = null;
+			$this->template->footer = null;
+			$this->template->no_back_button = true;
 			$this->template->menu = array();
 		} // Controller_Site::before
 

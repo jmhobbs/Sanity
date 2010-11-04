@@ -8,7 +8,7 @@ class Form extends Kohana_Form {
 	}
 
 	public static function open_slice ( $name ) {
-		$value = '<div class="form-slice" id="form-slice-' . htmlspecialchars( $name ). '">';
+		$value = '<div class="form-slice" id="form-slice-' . htmlspecialchars( $name ). '" data-role="fieldcontain">';
 		return $value;
 	}
 

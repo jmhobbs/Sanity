@@ -1,14 +1,5 @@
-<div class="content">
-<?php
-	echo Form::open( 'project/add/' );
-	echo Form::label( 'name', 'Name' );
-	echo Form::input( 'name' );
-	echo Form::submit( 'submit', 'Add', array( 'class' => 'submit' ) );
-	echo Form::close();
-?>
-</div>
-
-<ul class="menu">
+<ul data-role="listview" data-inset="true">
+	<li data-role="list-divider">Active Projects</li>
 	<?php
 		$empty_projects = array();
 		foreach( $projects as $project ) {
@@ -18,16 +9,21 @@
 				continue;
 			}
 	?>
-	<li><?php echo HTML::anchor( 'project/view/' . $project->id, $count . ' - ' . HTML::chars( $project->name ) ); ?></li>
+	<li>
+		<?php echo HTML::anchor( 'project/view/' . $project->id, HTML::chars( $project->name ) ); ?>
+		<span class="ui-li-count"><?php echo $count; ?></span>
+	</li>
 	<?php
 		}
 	?>
 </ul>
 
-<br/>
-
-<ul class="menu empty-projects">
+<ul data-role="listview" data-inset="true">
+	<li data-role="list-divider">Inactive Projects</li>
 	<?php foreach( $empty_projects as $project ): ?>
-	<li><?php echo HTML::anchor( 'project/view/' . $project->id, '0 - ' . HTML::chars( $project->name ) ); ?></li>
+	<li>
+		<?php echo HTML::anchor( 'project/view/' . $project->id, HTML::chars( $project->name ) ); ?>
+		<span class="ui-li-count">0</span>
+	</li>
 	<?php endforeach; ?>
 </ul>

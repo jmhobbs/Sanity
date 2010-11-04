@@ -12,6 +12,7 @@
 
 		public function action_index () {
 			$this->template->title = 'Sanity';
+			$this->template->right = array( 'text' => 'Log Out', 'target' => '/user/logout', 'attributes' => array( 'data-icon' => 'delete' ) );
 		}
 
 		/**
@@ -62,7 +63,7 @@
 				Request::instance()->redirect( 'user/' );
 			}
 
-			$this->template->left = array( 'text' => 'Login', 'target' => '/user/login' );
-		} 
+			$this->template->right = array( 'text' => 'Login', 'target' => '/user/login' );
+		}
 
 	}
