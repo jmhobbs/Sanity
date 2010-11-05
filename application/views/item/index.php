@@ -5,7 +5,6 @@
 <?php foreach( $items as $item ): ?>
 	<li>
 		<?php echo HTML::anchor( 'item/view/' . $item->id, HTML::chars( $item->item ) ); ?>
-		 <span class="ul-li-count"><?php echo HTML::chars( $item->project->name ); ?></span>
 	</li>
 <?php endforeach; ?>
 </ul>
