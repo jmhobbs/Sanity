@@ -3,9 +3,9 @@
 		<title>Sanity</title>
 		<meta name="apple-mobile-web-app-capable" content="yes"/> 
 		<link rel="apple-touch-icon" href="<?php echo URL::site( 'image/iphone.png' ); ?>" />
-		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.0a1/jquery.mobile-1.0a1.min.css" />
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.0a2/jquery.mobile-1.0a2.min.css" />
 		<script src="http://code.jquery.com/jquery-1.4.3.min.js"></script>
-		<script src="http://code.jquery.com/mobile/1.0a1/jquery.mobile-1.0a1.min.js"></script>
+		<script src="http://code.jquery.com/mobile/1.0a2/jquery.mobile-1.0a2.min.js"></script>
 	</head>
 	<body>
 		<div data-role="page" data-theme="b">
