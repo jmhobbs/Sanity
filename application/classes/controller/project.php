@@ -6,7 +6,7 @@
 			$this->template->title = 'Projects';
 			$this->template->left = array( 'text' => 'Dashboard', 'target' => 'user/' );
 			$this->template->right = array( 'text' => 'Add Project', 'target' => 'project/add/', 'attributes' => array( 'data-icon' => 'add' ) );
-			$this->template->content->projects = Auth::instance()->get_user()->projects->order_by( 'name' )->find_all();
+			$this->template->content->projects = Auth::instance()->get_user()->projects->where( 'closed', 'IS', null )->order_by( 'name' )->find_all();
 		}
 
 		public function action_view ( $id ) {
@@ -52,6 +52,31 @@
 				}
 			}
 
+		}
+
+		public function action_close ( $id ) {
+			$project = ORM::factory( 'project', $id );
+			if( ! $project->loaded() ) {
+				Message::error( 'No Such Project' );
+				Request::instance()->redirect( 'project/' );
+			}
+
+			if( Auth::instance()->get_user()->id != $project->user_id ) {
+				Message::error( 'That Project Doesn\'t Belong To You' );
+				Request::instance()->redirect( 'project/' );
+			}
+
+			$project->closed = true;
+			$project->save();
+
+			if( $project->saved() ) {
+				Message::success( 'Closed project, ' . HTML::chars( $project->name ) );
+				Request::instance()->redirect( 'project/' );
+			}
+			else {
+				Message::error( 'Could not close project.' );
+				Request::instance()->redirect( 'project/view/' . $project->id );
+			}
 		}
 
 	}
